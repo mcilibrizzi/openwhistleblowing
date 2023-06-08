@@ -1,5 +1,9 @@
 #!/bin/bash
 
+ # creating the virtualenv
+cd /usr/local/owb && virtualenv backend && source backend/bin/activate && pip install -r /usr/local/owb/backend/usr/share/requirements.txt && pip install pysqlcipher --install-option="--bundled"
+
+
 IPS="$( ifconfig | grep inet | tr -s ' ' |  cut -d ' ' -f 3 | cut -d ':' -f 2 | sed '/^$/d' | tr '\n' ' ' | sed 's# $##g' )"
 HOSTS="localhost,$( echo "${IPS}" | tr ' ' ',' )"
 [ -n "${EXTERNAL_HOSTNAME}" ] && HOSTS="${HOSTS},${EXTERNAL_HOSTNAME}"
